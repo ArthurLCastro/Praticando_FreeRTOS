@@ -90,7 +90,7 @@ void vTask_ButtonLED(void * pvParameters) {
 }
 
 void vTask_AnalogInput(void * pvParameters) {
-  int valorLido, valorAnterior;
+  int valorLido, valorAnterior = -1;
 
   pinMode(POT_PIN, INPUT);
 
