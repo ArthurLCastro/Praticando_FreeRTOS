@@ -39,20 +39,19 @@ void vTask_LCD(void * pvParameters);
 void setup() {
   Serial.begin(115200);
 
-  // Criacao de tarefas
-  xTaskCreate(vTask_HeartBeatLED, "HB_LED", configMINIMAL_STACK_SIZE+1024, NULL, 0, &vHandle_HeartBeatLED);
-  xTaskCreate(vTask_ButtonLED, "BUT_LED", configMINIMAL_STACK_SIZE+1024, NULL, 1, &vHandle_ButtonLED);
-  xTaskCreate(vTask_AnalogInput, "ANALOG_IN", configMINIMAL_STACK_SIZE+1024, NULL, 2, &vHandle_AnalogInput);
-  xTaskCreate(vTask_LCD, "LCD", configMINIMAL_STACK_SIZE+1024, NULL, 1, &vHandle_LCD);
-
   // Criacao de filas
   xQueue_AnalogValue = xQueueCreate(3, sizeof(int));
-  
+
   if(xQueue_AnalogValue == NULL){
     Serial.println("ERRO: Não foi possível criar a fila!");
     while(1);
   }
 
+  // Criacao de tarefas
+  xTaskCreate(vTask_HeartBeatLED, "HB_LED", configMINIMAL_STACK_SIZE+1024, NULL, 0, &vHandle_HeartBeatLED);
+  xTaskCreate(vTask_ButtonLED, "BUT_LED", configMINIMAL_STACK_SIZE+1024, NULL, 1, &vHandle_ButtonLED);
+  xTaskCreate(vTask_AnalogInput, "ANALOG_IN", configMINIMAL_STACK_SIZE+1024, NULL, 2, &vHandle_AnalogInput);
+  xTaskCreate(vTask_LCD, "LCD", configMINIMAL_STACK_SIZE+1024, NULL, 1, &vHandle_LCD);
 }
 
 void loop() {
