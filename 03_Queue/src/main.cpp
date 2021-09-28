@@ -139,7 +139,6 @@ void vTask_LCD(void * pvParameters) {
 
     if(xQueueReceive(xQueue_AnalogValue, &leitura, pdMS_TO_TICKS(10)) == pdTRUE){
       Serial.println("[LCD] Leitura Analógica: " + String(leitura));
-      Serial.println("----------------------------------------");
   
       lcd.setCursor(0, 1);
       lcd.print("Leitura:        ");
